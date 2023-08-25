@@ -1,0 +1,140 @@
+Microsoft Windows [Version 10.0.16299.15]
+(c) 2017 Microsoft Corporation. All rights reserved.
+
+C:\Users\scott>cd..
+
+C:\Users>cd..
+
+C:\>cd sqlite3
+
+C:\sqlite3>sqlite3 college.db
+SQLite version 3.36.0 2021-06-18 18:36:39
+Enter ".help" for usage hints.
+sqlite> CREATE TABLE dept_master
+   ...>
+   ...> (dept_id INTEGER PRIMARY KEY
+   ...> AUTOINCREMENT,
+   ...>
+   ...> );
+Error: near ")": syntax error
+sqlite> create table dept_master
+   ...> (
+   ...> dept_id int primary key autoincrement,
+   ...> dept_name text
+   ...> );
+Error: AUTOINCREMENT is only allowed on an INTEGER PRIMARY KEY
+sqlite> create table dept_master
+   ...> (
+   ...> dept_id INTEGER PRIMARY KEY AUTOINCREMENT,
+   ...> dept_name TEXT
+   ...> );
+sqlite> INSERT INTO dept_master VALUES(1,'admin');
+sqlite> INSERT INTO dept_master VALUES(2,'sales');
+sqlite> INSERT INTO dept_master VALUES(3,'quality control');
+sqlite> INSERT INTO dept_master VALUES(3,'marketing');
+Error: UNIQUE constraint failed: dept_master.dept_id
+sqlite> INSERT INTO dept_master VALUES(4,'marketing');
+sqlite> select*fromdepy_master;
+Error: near "fromdepy_master": syntax error
+sqlite> select*from dept_master;
+1|admin
+2|sales
+3|quality control
+4|marketing
+sqlite> create table emp_master
+   ...> (
+   ...> emp_id INTEGER PRIMARY KEY AUTOINCREMENT,
+   ...> first_name TEXT,
+   ...> last_name TEXT,
+   ...> salary NUMERIC,
+   ...> dept_id INTEGER
+   ...> );
+sqlite> insert into emp_master values(1,'shweta','jariwala',19300,2);
+sqlite> insert into emp_master values(2,'vinay','jariwala',35100,3);
+sqlite> insert into emp_master values(3,'jagruti','viras',95002));
+Error: near ")": syntax error
+sqlite> insert into emp_master values(3,'jagruti','viras',95002);
+Error: table emp_master has 5 columns but 4 values were supplied
+sqlite> insert into emp_master values(3,'jagruti','viras',95002,2);
+sqlite> insert into emp_master values(4,'shweta','rana',12000,3);
+sqlite> insert into emp_master values(5,'sonal','menpara',13000,1);
+sqlite> insert into emp_master values(6,'yamini','patel',10000,2);
+sqlite> insert into emp_master values(7,'khyati','shah',49900,3);
+sqlite> insert into emp_master values(8,'shwets','jariwala',19400,2);
+sqlite> select *from emp_master;
+1|shweta|jariwala|19300|2
+2|vinay|jariwala|35100|3
+3|jagruti|viras|95002|2
+4|shweta|rana|12000|3
+5|sonal|menpara|13000|1
+6|yamini|patel|10000|2
+7|khyati|shah|49900|3
+8|shwets|jariwala|19400|2
+sqlite> .mode column
+sqlite> select*from emp_master;
+emp_id  first_name  last_name  salary  dept_id
+------  ----------  ---------  ------  -------
+1       shweta      jariwala   19300   2
+2       vinay       jariwala   35100   3
+3       jagruti     viras      95002   2
+4       shweta      rana       12000   3
+5       sonal       menpara    13000   1
+6       yamini      patel      10000   2
+7       khyati      shah       49900   3
+8       shwets      jariwala   19400   2
+sqlite> .mode box
+sqlite> select*from emp_master;
++----------------------------------------------------+
+¦ emp_id ¦ first_name ¦ last_name ¦ salary ¦ dept_id ¦
++--------+------------+-----------+--------+---------¦
+¦ 1      ¦ shweta     ¦ jariwala  ¦ 19300  ¦ 2       ¦
+¦ 2      ¦ vinay      ¦ jariwala  ¦ 35100  ¦ 3       ¦
+¦ 3      ¦ jagruti    ¦ viras     ¦ 95002  ¦ 2       ¦
+¦ 4      ¦ shweta     ¦ rana      ¦ 12000  ¦ 3       ¦
+¦ 5      ¦ sonal      ¦ menpara   ¦ 13000  ¦ 1       ¦
+¦ 6      ¦ yamini     ¦ patel     ¦ 10000  ¦ 2       ¦
+¦ 7      ¦ khyati     ¦ shah      ¦ 49900  ¦ 3       ¦
+¦ 8      ¦ shwets     ¦ jariwala  ¦ 19400  ¦ 2       ¦
++----------------------------------------------------+
+sqlite> select d.dept_id,dept_name,emp_id,first_name
+   ...> from dept_master
+   ...> leLEFT OUTER JOIN
+   ...> ):
+   ...> );
+Error: near ")": syntax error
+sqlite> select d.dept_id,dept_name,emp_id,first_name
+   ...> from dept_master
+   ...> LEFT OUTER JOIN
+   ...> emp_master ON d.dept_id=e.dept_id;
+Error: no such column: d.dept_id
+sqlite> select dept_id,dept_name,emp_id,first_name
+   ...> from dept_master
+   ...> LEFT OUTER JOIN
+   ...> emp_master ON d.dept_id=e.dept_id;
+Error: ambiguous column name: dept_id
+sqlite> select d.dept_id,dept_name,emp_id,first_name
+   ...> from dept_master
+   ...> LEFT OUTER JOIN
+   ...> emp_master e ON d.dept_id=e.dept_id;
+Error: no such column: d.dept_id
+sqlite> mode. tupple
+   ...> select*from emp_master;
+Error: near "mode": syntax error
+sqlite> select d.dept_id,dept_name,emp_id,first_name
+   ...> from dept_master d
+   ...> LEFT OUTER JOIN
+   ...> emp_master e ON d.dept_id=e.dept_id;
++-------------------------------------------------+
+¦ dept_id ¦    dept_name    ¦ emp_id ¦ first_name ¦
++---------+-----------------+--------+------------¦
+¦ 1       ¦ admin           ¦ 5      ¦ sonal      ¦
+¦ 2       ¦ sales           ¦ 3      ¦ jagruti    ¦
+¦ 2       ¦ sales           ¦ 1      ¦ shweta     ¦
+¦ 2       ¦ sales           ¦ 8      ¦ shwets     ¦
+¦ 2       ¦ sales           ¦ 6      ¦ yamini     ¦
+¦ 3       ¦ quality control ¦ 7      ¦ khyati     ¦
+¦ 3       ¦ quality control ¦ 4      ¦ shweta     ¦
+¦ 3       ¦ quality control ¦ 2      ¦ vinay      ¦
+¦ 4       ¦ marketing       ¦        ¦            ¦
++-------------------------------------------------+
+sqlite>
